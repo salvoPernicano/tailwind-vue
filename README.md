@@ -1,5 +1,5 @@
 Sito web FitZone
- !(https://seeklogo.com/images/V/vuejs-logo-17D586B587-seeklogo.com.png)
+ !https://seeklogo.com/images/V/vuejs-logo-17D586B587-seeklogo.com.png
 
 Il sito web Fitness è stato sviluppato per consolidare le mie competenze nel framework Vue.js 3, sfruttando inoltre la libreria Tailwind CSS per garantire uno stile uniforme e Axios per gestire le chiamate API. 
 
