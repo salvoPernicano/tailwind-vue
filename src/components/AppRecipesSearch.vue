@@ -1,12 +1,12 @@
 <script>
 import { store } from '../store'
 import axios from 'axios'
-import AppRecipesCards from './AppRecipesCards.vue';
+import AppRecipeCard from './AppRecipeCard.vue';
 
 export default {
     name: 'AppRecipesSearch',
     components: {
-        AppRecipesCards
+        AppRecipeCard
     },
     data() {
 
@@ -61,24 +61,19 @@ export default {
                 <span class="font-semibold">Caloric range: {{ store.minCalories }} - {{ store.maxCalories }}</span>
         </div>
     </div>
-    <div>
+    
         <div  class="mx-auto flex flex-col md:flex-row flex-wrap gap-6 justify-center p-10 ">
-            <div @click="showIngredients(index)" :class="element.toggleIngredients ? 'h-auto' :'h-80'"  class="bg-white relative hover:text-red-500  hover:cursor-pointer  transition-all duration-500 card border-red-500  border shadow-md hover:shadow-red-700 w-full md:w-72  px-5  text-center rounded-md overflow-hidden" v-for="(element,index ) in store.recipesArray" :key="index">
-                <div>
-                    <h2 class="font-bold text-lg truncate py-2">{{ element.recipe.label}}</h2>
-                    <img class="block mx-auto h-60 shadow-md" :src="element.recipe.image" alt="">
-                    <h3 class="text-orange-600 font-semibold">{{Math.floor( element.recipe.calories / element.recipe.yield)  }} Calories per portion</h3>
-
-                </div>
-                <div  :class="element.toggleIngredients ? 'p-1' :'absolute bottom-0 left-0 -z-10'" >
-                    <h2 class="font-bold">Ingredients for {{ element.recipe.yield }} people:</h2>
-                    <ul class="text-sm font-semibold" >
-                        <li class="text-black " v-for="(item,index) in element.recipe.ingredientLines">{{ item }}</li>
-                    </ul>
-                </div>
-            </div>
+            <AppRecipeCard @click="showIngredients(index)" :class="element.toggleIngredients ? 'h-auto' :'h-80'" v-for="(element,index ) in store.recipesArray" :key="index" 
+            :name="element.recipe.label"
+            :image="element.recipe.image"
+            :calories="element.recipe.calories"
+            :qty="element.recipe.yield"
+            :ingredients="element.recipe.ingredientLines"
+            :toggle="element.toggleIngredients"
+            >
+            </AppRecipeCard>
         </div>
-    </div>
+    
 </template>
 
 

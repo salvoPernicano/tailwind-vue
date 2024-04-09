@@ -15,20 +15,3 @@ export const store = reactive({
 }
 );
 
-export function sayhello(){
-    console.log('hello')
-}
-
-export function getRecipe(){
-    store.recipesArray = [];
-    const httpRequest = `${store.accessPoint}${store.type}&q=${store.ingredient}${store.app_id}${store.app_key}&diet=high-protein`;
-    console.log(httpRequest);
-    axios.get(httpRequest)
-    .then(response =>{
-        store.recipesArray.push(response.data);
-        console.log(response.data)
-    })
-    .catch(error => {
-        console.error('Error during Api Call')
-    })
-}
