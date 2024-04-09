@@ -12,12 +12,11 @@ export default {
 
         return {
             store,
-            searchResultError : false
+            searchResultError : null
         }
     },
     methods: {
         getRecipe() {
-            this.searchResultError = false
             store.recipesArray = [];
             const httpRequest = `${store.accessPoint}${store.type}&q=${store.ingredient}${store.app_id}${store.app_key}&calories=${store.minCalories}-${store.maxCalories}`;
             console.log(httpRequest);
@@ -25,13 +24,15 @@ export default {
                 .then(response => {
                     store.recipesArray = (response.data.hits).map((item) => ({...item, toggleIngredients : false}));
                     console.log(store.recipesArray);
+                    if (store.recipesArray.length === 0){
+                        this.searchResultError = true
+                    } else {
+                        this.searchResultError = false
+                    }
                 })
                 .catch(error => {
                     console.error('Error during Api Call')
                 })
-                if (store.recipesArray.length <= 0){
-                    this.searchResultError = true
-                }
         },
 
         showIngredients(index){
