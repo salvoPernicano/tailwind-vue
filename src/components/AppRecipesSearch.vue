@@ -45,8 +45,8 @@ export default {
 </script>
 
 <template>
-    <div class="text-center  mx-auto mt-4 p-2 w-4/5 md:w-3/4">
-        <h1 class="font-semibold text-black p-1 m-2">Search for recipes based on some ingredients!</h1>
+    <div class="text-center  mx-auto mt-4  w-4/5 md:w-3/4">
+        <h1 class="font-semibold text-xl text-black p-1 m-2">Search for recipes based on some ingredients!</h1>
         <div>
             <label class="font-semibold text-black p-1" for="">Ingredients:</label>
             <input v-model="store.ingredient"
@@ -61,7 +61,7 @@ export default {
                 type="text" placeholder="Max Amount of Calories">
 
             <button
-                class="block mt-3 mx-auto  py-2 px-4 bg-blue-500 rounded-md text-white font-semibold hover:bg-blue-800 transition-colors"
+                class="block m-6 mx-auto  py-2 px-4 bg-blue-500 rounded-md text-white font-semibold hover:bg-blue-800 transition-colors"
                 @click="getRecipe">Enter</button>
                 <span class="font-semibold">Caloric range: {{ store.minCalories }} - {{ store.maxCalories }}</span>
         </div>
