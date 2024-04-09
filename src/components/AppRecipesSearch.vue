@@ -12,10 +12,12 @@ export default {
 
         return {
             store,
+            searchResultError : false
         }
     },
     methods: {
         getRecipe() {
+            this.searchResultError = false
             store.recipesArray = [];
             const httpRequest = `${store.accessPoint}${store.type}&q=${store.ingredient}${store.app_id}${store.app_key}&calories=${store.minCalories}-${store.maxCalories}`;
             console.log(httpRequest);
@@ -27,6 +29,9 @@ export default {
                 .catch(error => {
                     console.error('Error during Api Call')
                 })
+                if (store.recipesArray.length <= 0){
+                    this.searchResultError = true
+                }
         },
 
         showIngredients(index){
@@ -41,7 +46,7 @@ export default {
 
 <template>
     <div class="text-center  mx-auto mt-4 p-2 w-4/5 md:w-3/4">
-        <h1 class="font-semibold text-black p-1 my-2">Search for recipes based on some ingredients!</h1>
+        <h1 class="font-semibold text-black p-1 m-2">Search for recipes based on some ingredients!</h1>
         <div>
             <label class="font-semibold text-black p-1" for="">Ingredients:</label>
             <input v-model="store.ingredient"
@@ -61,7 +66,10 @@ export default {
                 <span class="font-semibold">Caloric range: {{ store.minCalories }} - {{ store.maxCalories }}</span>
         </div>
     </div>
-    
+        <div v-if="searchResultError" class="text-3xl text-center mt-8 text-red-600 font-bold">
+            <h1>No recipe found, try a new research!</h1>
+        </div>
+
         <div  class="mx-auto flex flex-col md:flex-row flex-wrap gap-6 justify-center p-10 ">
             <AppRecipeCard @click="showIngredients(index)" :class="element.toggleIngredients ? 'h-auto' :'h-80'" v-for="(element,index ) in store.recipesArray" :key="index" 
             :name="element.recipe.label"
